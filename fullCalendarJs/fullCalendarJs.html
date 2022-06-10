@@ -1,0 +1,78 @@
+<!-- 
+@description: Lightning web component using Fullcalendar.io js library to display most recent events
+@author: Brahmaji tammana from www.auraenabled.com 
+@jslibrary: https://fullcalendar.io/ -->
+<template>
+
+    <!-- Spinner to show on waiting screens -->
+    <template if:true={openSpinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+  
+   <div class="slds-grid slds-wrap slds-theme_default">
+        <div class="slds-col slds-size_2-of-12">
+            <!-- To display list of events or any parent records  
+                TODO: add drag items in this div to drop on fullcalendar.
+            -->
+            <div class=" checkReset slds-p-around_medium" style="height:800px">
+                
+              <ul class="slds-m-around_large">
+              <template  class="slds-col slds-align_absolute-center" for:each={titles} for:item="eachevent">
+                <div class="check" key={eachevent.id}>
+                  <p> <input  class="slds-col  checkbox-round" name="checkBox" type="checkbox" checked={bool}   value={eachevent}  onchange={handleChange} >
+                      {eachevent}</p>
+                      
+                    <span class="checkmark"></span>
+                </div>
+              </template>
+              </ul>
+              <lightning-button class="checkAll slds-align_absolute-center" type="button" label="Reset All" onclick={handleResetAll}></lightning-button>
+            </div>
+        </div>
+        <div class="slds-col slds-size_9-of-12">
+                <!-- fullcalendar sits in this div -->
+                <div id="calendar" class="fullcalendarjs"></div>
+        </div>
+        <div class="slds-col slds-size_1-of-12">
+            
+    </div>
+   </div>
+  
+  <!-- Display the Selected Event Details -->
+  <template if:true={selectedEvent} >
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+      aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+      <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Event Details</h2>
+          </header>
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+  
+            <lightning-card  variant="Narrow"  title={selectedEvent.title} icon-name="standard:event">
+                <p class="slds-p-horizontal_small">
+                  Subject : {selectedEvent.title}
+                </p>
+                <p class="slds-p-horizontal_small">
+                  StartDate : 
+                  <lightning-formatted-date-time value={selectedEvent.start} year="2-digit" month="short" day="2-digit" weekday="long">
+                  </lightning-formatted-date-time>
+                </p>
+                <p class="slds-p-horizontal_small">
+                  EndDate : 
+                  <lightning-formatted-date-time value={selectedEvent.end} year="2-digit" month="short" day="2-digit" weekday="long">
+                  </lightning-formatted-date-time>
+                </p>
+                <p class="slds-p-horizontal_small">
+                  Description : {selectedEvent.description}
+                </p>
+            </lightning-card>
+            
+          </div>
+          <footer class="slds-modal__footer">
+            <button class="slds-button slds-button_brand" onclick={closeModal}>Close</button>
+          </footer>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template> 
+  </template>

@@ -1,0 +1,37 @@
+.checkbox-round {
+    width: 1.2em;
+    height: 1.2em;
+    background-color: grey;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+	display: inline-block;
+	padding: 10%;
+	margin:10px;
+  border-radius: 2px;
+    font-weight: bold !important;
+}
+.check{
+  text-transform:uppercase;
+  text-align: start;
+}
+
+.checkbox-round:checked  {
+    background-color: #2a52be;
+}
+p{
+  text-align: justify;
+}
+.fullcalendarjs {
+    max-width: 1200px;
+    margin: 40px auto;
+  }
+.checkReset{
+    margin-top: 50px;
+  }
+  .checkAll{
+    margin-right: 85px;
+  }
+  
